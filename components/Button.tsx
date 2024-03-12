@@ -37,7 +37,7 @@ export function LoginButtonGithub() {
     try {
       await signIn("github"); // Initiates GitHub authentication
     } catch (error) {
-      console.error("GitHub login error:", error);
+      console.error("GitHub login Error:", error);
     }
   };
   return (
