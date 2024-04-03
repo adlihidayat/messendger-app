@@ -8,9 +8,11 @@ const ChatHeader = ({ user, session, latestOnline }: any) => {
   const [isActive, setIsActive] = useState(false);
   const [isShowProfile, setIsShowProfile] = useState(false);
 
+  console.log(latestOnline);
+
   function extractFormattedDate(timestamp: any) {
     if (!timestamp) {
-      return null;
+      return false;
     }
     const date = new Date(timestamp);
     const date2 = new Date();
@@ -65,9 +67,11 @@ const ChatHeader = ({ user, session, latestOnline }: any) => {
             <span className=" text-white font-semibold w-[187px] truncate">
               {user.name}
             </span>
-            <span className=" text-xs text-gray-300">
-              Last seen at {extractFormattedDate(latestOnline[0].timestamp)}
-            </span>
+            {latestOnline.length !== 0 && (
+              <span className=" text-xs text-gray-300">
+                Last seen at {extractFormattedDate(latestOnline[0].timestamp)}
+              </span>
+            )}
           </div>
         </div>
       </div>
@@ -95,9 +99,11 @@ const ChatHeader = ({ user, session, latestOnline }: any) => {
               </div>
               <span className=" text-base font-semibold z-20">{user.name}</span>
               <span className=" z-20">{user.email}</span>
-              <span className=" text-[#b0b0b0] mb-5 z-20">
-                last seen at {extractFormattedDate(latestOnline[0].timestamp)}
-              </span>
+              {latestOnline.length !== 0 && (
+                <span className=" text-[#b0b0b0] mb-5 z-20">
+                  Last seen at {extractFormattedDate(latestOnline[0].timestamp)}
+                </span>
+              )}
               <div className=" space-x-2  flex">
                 <button
                   onClick={handleMessage}
