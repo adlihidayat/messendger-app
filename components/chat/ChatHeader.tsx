@@ -8,8 +8,6 @@ const ChatHeader = ({ user, session, latestOnline }: any) => {
   const [isActive, setIsActive] = useState(false);
   const [isShowProfile, setIsShowProfile] = useState(false);
 
-  console.log(latestOnline);
-
   function extractFormattedDate(timestamp: any) {
     if (!timestamp) {
       return false;
