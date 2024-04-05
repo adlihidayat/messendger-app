@@ -11,21 +11,20 @@ const LeftSideBar = ({ session }: any) => {
   useEffect(() => {
     const fetchFriends = async () => {
       if (searchName !== "") {
+        setFriends([]);
         const response = await fetch(
-          `/api/friend/search?name=${searchName}&user=${
+          `/api/friend/search?target=${searchName}&user=${
             session.user.email.split("@")[0]
           }`
         );
         const data = await response.json();
         setFriends(data);
-        // console.log(data.data);
       } else {
         const response = await fetch(
           `/api/friend?user=${session.user.email.split("@")[0]}`
         );
         const data = await response.json();
         setFriends(data);
-        // console.log(data.data);
       }
     };
 
@@ -36,7 +35,7 @@ const LeftSideBar = ({ session }: any) => {
     <>
       <FriendListHeader />
       <SearchForm setSearchName={setSearchName} />
-      <FriendItemContainer data={friends} />
+      <FriendItemContainer data={friends} session={session} />
     </>
   );
 };

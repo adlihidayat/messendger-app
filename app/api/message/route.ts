@@ -12,26 +12,17 @@ export async function POST(req: NextRequest) {
     try {
         const message = await prisma.message.create({
             data: {
-                user1Email: body.user1Email,
-                user2Email: body.user2Email,
+                sender: body.sender,
+                conversationId: body.conversationId,
                 content: body.content,
                 readStatus: false,
                 timestamp: new Date(),
             },
         });
 
-        const friend = await prisma.friend.updateMany({
+        await prisma.conversation.update({
             where: {
-                OR: [
-                    {
-                        user1Email: body.user1Email,
-                        user2Email: body.user2Email
-                    },
-                    {
-                        user1Email: body.user2Email,
-                        user2Email: body.user1Email
-                    },
-                ],
+                id: body.conversationId,
             },
             data: {
                 lastMessage: body.content,
@@ -39,7 +30,8 @@ export async function POST(req: NextRequest) {
             },
         });
 
-        await pusherServer.trigger(body.userId, 'newMsg', message);
+
+        await pusherServer.trigger(body.conversationId, 'newMsg', message);
 
         return NextResponse.json({ message: "message send" }, { status: 201 });
     } catch (error: any) {

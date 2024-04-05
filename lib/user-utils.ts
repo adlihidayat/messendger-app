@@ -16,25 +16,27 @@ export const getUserData = async (id: string) => {
     }
 };
 
-export const getLatestOnline = async (user1Email: string) => {
-    try {
-        const latestQuery = await prisma.message.findMany({
-            where: {
-                user1Email: user1Email
-            },
-            orderBy: {
-                id: 'desc',
-            },
-            take: 1,
-        })
-        return latestQuery;
-    } catch (error) {
-        console.error(error);
-        return error; // Handle errors gracefully
-    } finally {
-        await prisma.$disconnect(); // Close Prisma connection to avoid resource leaks
-    }
-};
+// export const getLatestOnline = async (user1Email: any, user2Email: any) => {
+//     try {
+//         const latestQuery = await prisma.conversation.findMany({
+//             where: {
+//                 userEmails: {
+//                     hasEvery: [user1Email, user2Email]
+//                 },
+//             },
+//             orderBy: {
+//                 id: 'desc',
+//             },
+//             take: 1,
+//         })
+//         return latestQuery;
+//     } catch (error) {
+//         console.error(error);
+//         return error; // Handle errors gracefully
+//     } finally {
+//         await prisma.$disconnect(); // Close Prisma connection to avoid resource leaks
+//     }
+// };
 
 export const checkUserExistence = async (email: string) => {
     try {
@@ -53,30 +55,57 @@ export const checkUserExistence = async (email: string) => {
     }
 };
 
-export const checkFriendStatus = async (user1Email: any, user2Email: any) => {
+export async function getOppositeUserByConversationId(conversationId: string, user: string) {
     try {
-        const existingFriend1 = await prisma.friend.findFirst({
+        const participants = await prisma.participant.findMany({
             where: {
-                user1Email,
-                user2Email,
+                conversationId: conversationId,
+            },
+            include: {
+                user: true, // Include the user details
             },
         });
 
-        // Check for existing friendship (2nd user as user1)
-        const existingFriend2 = await prisma.friend.findFirst({
-            where: {
-                user1Email: user2Email,
-                user2Email: user1Email,
-            },
+        // Extract user details from the fetched participants
+        const users = participants.map(participant => participant.user);
+
+        if (users[0].email === user) {
+            return users[1];
+        }
+        return users[0];
+    } catch (error) {
+        console.error(error);
+        throw new Error('Failed to fetch users.'); // Handle errors gracefully
+    }
+}
+
+export const checkFriendStatus = async (user1Email: string, user2Email: string) => {
+    try {
+        // Find conversations where user1 is a participant
+        const user1Conversations = await prisma.participant.findMany({
+            where: { userEmail: user1Email }
         });
 
-        if (existingFriend1 || existingFriend2) {
-            return true
+        // Check if there exists a conversation where both users are participants
+        for (const conversation of user1Conversations) {
+            const existingParticipant = await prisma.participant.findFirst({
+                where: {
+                    conversationId: conversation.conversationId,
+                    userEmail: user2Email
+                }
+            });
+
+            if (existingParticipant) {
+                // Conversation between the two users found
+                return true;
+            }
         }
 
-    } catch (error) {
+        // No existing conversation found between the two users
         return false;
-    } finally {
-        await prisma.$disconnect(); // Close Prisma connection to avoid resource leaks
+    } catch (error) {
+        console.error("Error in checkFriendStatus:", error);
+        return false;
     }
 };
+

@@ -1,8 +1,9 @@
+import { Session } from "inspector";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const FriendItem = ({ data }: any) => {
+const FriendItem = ({ data, session }: any) => {
   function extractFormattedDate(timestamp: any) {
     if (!timestamp) {
       return null;
@@ -26,12 +27,16 @@ const FriendItem = ({ data }: any) => {
 
   return (
     <Link
-      href={`/chat/${data.user.id}`}
+      href={`/chat/${data.id}`}
       className="flex items-center space-x-4  py-3"
     >
       <div className=" w-[54px] h-[54px] sm:w-[48px] sm:h-[48px]  rounded-full bg-gray-200 overflow-hidden">
         <Image
-          src={data.user.image}
+          src={
+            session.user.email === data.participants[0].email
+              ? data.participants[1].image
+              : data.participants[0].image
+          }
           alt=""
           width={100}
           height={100}
@@ -40,7 +45,11 @@ const FriendItem = ({ data }: any) => {
       </div>
       <div className=" flex-1 ">
         <div className=" w-full flex justify-between">
-          <span className=" text-white font-semibold">{data.user.name}</span>
+          <span className=" text-white font-semibold">
+            {session.user.email === data.participants[0].email
+              ? data.participants[1].name
+              : data.participants[0].name}
+          </span>
           <span className=" text-xs">
             {extractFormattedDate(data.lastMessageAt)}
           </span>

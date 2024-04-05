@@ -60,6 +60,7 @@ export function LoginButtonGithub() {
 export function LogoutButton() {
   return (
     <button
+      title="Logout Button"
       onClick={() => signOut()}
       className=" bg-[#b93232 text-white font text-xs sm:hover:bg-[#2a2a2a]  rounded sm:w-8 sm:h-8 flex justify-center items-center hover-opacity"
     >

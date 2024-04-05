@@ -11,7 +11,7 @@ const nunito = Nunito({ subsets: ["latin"] });
 
 export default async function Home({ params }: any) {
   const session = await getServerSession(authOptions);
-  const user = await getUserData(params.id);
+  // const user = await getUserData(params.id);
 
   return (
     <main className="flex h-screen flex-col items-center relative lg:flex-row">
@@ -20,7 +20,7 @@ export default async function Home({ params }: any) {
           <div className=" h-screen flex-col items-center w-full hidden lg:flex lg:w-[400px] bg-slate-70 border-r border-gray-700 top-0">
             <LeftSideBar session={session} />
           </div>
-          <ChatContainer session={session} user={user} />
+          <ChatContainer session={session} id={params.id} />
         </>
       ) : (
         <section className=" text-white px-14 text-center h-screen w-full flex flex-col items-center justify-center">

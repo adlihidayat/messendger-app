@@ -64,7 +64,7 @@ export function AddFriendForm({ session }: any) {
     </div>
   );
 }
-const ChatForm = ({ session, user }: any) => {
+const ChatForm = ({ session, id }: any) => {
   const [input, setInput] = useState("");
 
   const sendMessage = async (e: any) => {
@@ -74,9 +74,8 @@ const ChatForm = ({ session, user }: any) => {
       const response = await fetch("/api/message", {
         method: "POST",
         body: JSON.stringify({
-          userId: user.id,
-          user1Email: session?.user?.email,
-          user2Email: user.email,
+          conversationId: id,
+          sender: session?.user?.email,
           content: input,
         }),
       });
@@ -101,6 +100,7 @@ const ChatForm = ({ session, user }: any) => {
         className=" px-5 flex-1 rounded-full text-sm outline-none bg-[#2b2b2b] text-white"
       />
       <button
+        title="send chat Button"
         disabled={input === ""}
         type="submit"
         className=" bg-[#B5CFF8] p-[9px] rounded-full disabled:opacity-25 hover-opacity"

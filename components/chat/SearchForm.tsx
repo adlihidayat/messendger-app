@@ -23,6 +23,7 @@ const SearchForm = ({ setSearchName }: any) => {
         className=" px-5 flex-1 rounded-full text-sm outline-none"
       />
       <button
+        title="Search Submit"
         type="submit"
         className=" bg-[#B5CFF8] p-3 rounded-full hover-opacity"
       >

@@ -1,10 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
-
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
@@ -47,10 +40,14 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+
   accounts      Account[]
   sessions      Session[]
-  friend        Friend[]
-  message       Message[]
+  participants      Participant[]
+
+  // conversationIds String[] 
+  // conversations Conversation[] @relation(fields: [conversationIds], references: [id])
+
 }
 
 model VerificationToken {
@@ -62,22 +59,35 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model Friend {
+model Conversation {
   id                  String    @id @default(cuid()) @map("_id")
-  user1Email          String 
-  user2Email          String 
-  user                User     @relation(fields: [user2Email], references: [email])
   unreadMessageCount  Int
   lastMessage         String
   lastMessageAt       DateTime @default(now())
+
+  // userEmails          String[] 
+  // users               User[] @relation(fields: [userEmails], references: [id])
+  participants        Participant[]
+  messagesIds         String[] 
+  messages            Message[]
 }
+
+model Participant {
+  id            String    @id @default(cuid()) @map("_id")
+  user          User      @relation(fields: [userEmail], references: [email])
+  conversation  Conversation  @relation(fields: [conversationId], references: [id])
+  userEmail        String    // This field will store the user's ID
+  conversationId String   // This field will store the conversation's ID
+}
+
 
 model Message {
   id                  String    @id @default(cuid()) @map("_id")
-  user1Email          String 
-  user2Email          String 
-  user                User     @relation(fields: [user2Email], references: [email])
+  sender              String 
   timestamp           DateTime @default(now())
   readStatus          Boolean
   content             String
+
+  conversationId      String 
+  conversation        Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
 }

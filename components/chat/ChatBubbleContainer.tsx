@@ -5,7 +5,7 @@ import Bubble1 from "./Bubble1";
 import ChatDate from "./ChatDate";
 import { pusherClient } from "@/lib/pusher";
 
-const ChatBubbleContainer = ({ message, session, userId }: any) => {
+const ChatBubbleContainer = ({ message, session, id }: any) => {
   const section = useRef<HTMLElement>(null);
   const [realmessage, setRealMessage] = useState(message);
 
@@ -27,7 +27,7 @@ const ChatBubbleContainer = ({ message, session, userId }: any) => {
   }, [realmessage]);
 
   useEffect(() => {
-    pusherClient.subscribe(userId);
+    pusherClient.subscribe(id);
 
     const messageHandler = (message: any) => {
       setRealMessage((current: any) => {
@@ -37,10 +37,10 @@ const ChatBubbleContainer = ({ message, session, userId }: any) => {
     pusherClient.bind("newMsg", messageHandler);
 
     return () => {
-      pusherClient.unsubscribe(userId);
+      pusherClient.unsubscribe(id);
       pusherClient.unbind("newMsg", messageHandler);
     };
-  }, [userId]);
+  }, [id]);
 
   return (
     <section
@@ -62,12 +62,12 @@ const ChatBubbleContainer = ({ message, session, userId }: any) => {
 
           <div
             className={`flex ${
-              data.user1Email === session.user.email
+              data.sender === session.user.email
                 ? " justify-end"
                 : "justify-start"
             } w-full`}
           >
-            {data.user1Email === session.user.email ? (
+            {data.sender === session.user.email ? (
               <Bubble1 data={data} />
             ) : (
               <Bubble2 data={data} />

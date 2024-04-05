@@ -1,30 +1,31 @@
 import { prisma } from "./db";
 
-export async function getMessage(user1Email: any, user2Email: any) {
+export async function getMessages(conversationId: string) {
     try {
-        const data = await prisma.message.findMany({
+        const messages = await prisma.message.findMany({
             where: {
-                OR: [
-                    {
-                        user1Email: user1Email,
-                        user2Email: user2Email
-                    },
-                    {
-                        user1Email: user2Email,
-                        user2Email: user1Email
-                    },
-                ],
+                conversationId: conversationId,
             },
             orderBy: {
-                timestamp: "asc",
+                timestamp: 'asc', // or 'desc' for descending order
             },
         });
-
-        return data;
+        return messages;
     } catch (error) {
         console.error(error);
-        return error; // Handle errors gracefully
-    } finally {
-        await prisma.$disconnect(); // Close Prisma connection to avoid resource leaks
+        throw new Error('Failed to fetch messages.'); // Handle errors gracefully
+    }
+}
+export async function getConversation(conversationId: string) {
+    try {
+        const messages = await prisma.conversation.findMany({
+            where: {
+                id: conversationId,
+            },
+        });
+        return messages;
+    } catch (error) {
+        console.error(error);
+        throw new Error('Failed to fetch messages.'); // Handle errors gracefully
     }
 }

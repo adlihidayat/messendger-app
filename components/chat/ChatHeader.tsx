@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { Unfriend, Unfriend2 } from "../Button";
 
-const ChatHeader = ({ user, session, latestOnline }: any) => {
+const ChatHeader = ({ user, session, conversation }: any) => {
   const [isActive, setIsActive] = useState(false);
   const [isShowProfile, setIsShowProfile] = useState(false);
 
@@ -65,15 +65,17 @@ const ChatHeader = ({ user, session, latestOnline }: any) => {
             <span className=" text-white font-semibold w-[187px] truncate">
               {user.name}
             </span>
-            {latestOnline.length !== 0 && (
+            {conversation[0].lastMessageAt !== 0 && (
               <span className=" text-xs text-gray-300">
-                Last seen at {extractFormattedDate(latestOnline[0].timestamp)}
+                Last seen at{" "}
+                {extractFormattedDate(conversation[0].lastMessageAt)}
               </span>
             )}
           </div>
         </div>
       </div>
       <button
+        title="view more Button"
         onClick={handleMore}
         className=" space-y-1 duration-300 sm:hover:bg-[#222222] px-5 py-3 rounded-full"
       >
@@ -97,9 +99,10 @@ const ChatHeader = ({ user, session, latestOnline }: any) => {
               </div>
               <span className=" text-base font-semibold z-20">{user.name}</span>
               <span className=" z-20">{user.email}</span>
-              {latestOnline.length !== 0 && (
+              {conversation[0].lastMessageAt !== 0 && (
                 <span className=" text-[#b0b0b0] mb-5 z-20">
-                  Last seen at {extractFormattedDate(latestOnline[0].timestamp)}
+                  Last seen at{" "}
+                  {extractFormattedDate(conversation[0].lastMessageAt)}
                 </span>
               )}
               <div className=" space-x-2  flex">
