@@ -25,10 +25,10 @@ export default async function Home() {
         <div className="flex flex-col items-center">
           <div className="   text-center  w-[280px] px-6 rounded-xl lg:p-0">
             <h1 className={`${nunito.className} text-2xl font-bold `}>
-              Welcome back
+              Welcome
             </h1>
             <p className=" text-xs text-gray-400 mb-10">
-              we&apos;re exited to see you again
+              we&apos;re exited to see you
             </p>
             <p className=" text-[10px] text-gray-900 mb-2">
               choose your login option
