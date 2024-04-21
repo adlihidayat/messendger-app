@@ -29,7 +29,7 @@
 
 A <b>Real Time Chat App</b>, Experience the freedom of real-time communication, no matter where you are! Our chat app enables you to stay connected with friends, colleagues, and loved ones from anywhere, anytime. Whether you're on the go, at home, or traveling, our platform ensures seamless connectivity. Engage in lively conversations, share updates, and collaborate in real-time, all at your fingertips. Embrace the convenience of staying connected whenever inspiration strikes.
 
-# 🔥 Features
+## 🔥 Features
 
 Here are some feature from Messendger:
 
@@ -38,7 +38,7 @@ Here are some feature from Messendger:
 - <b>Add</b>, Friend user can add friend by the email
 - <b>Realtime</b>, Chat the app can connect wherever and whenever the user in time
 
-# 🛠️ Tools
+## 🛠️ Tools
 
 The website is built using a robust tech stack, incorporating cutting-edge technologies to ensure seamless performance and user experience
 
@@ -49,7 +49,7 @@ The website is built using a robust tech stack, incorporating cutting-edge techn
 - <b>Pusher</b>, Bi-directional hosted APIs to make realtime
 - <b>NextAuth</b>, Open-source authentication solution for Next js
 
-# 💿 Usage
+## 💿 Usage
 
 To get started, simply visit our website at <https://messendger-app.vercel.app>. Then follow these step.
 
