@@ -1,7 +1,7 @@
 <h1 align="center"><b>Messendger</b></h1>
 
 <p align="center">
-    <a href="https://messendger-app.vercel.app/" target="_blank"><img src="public/icon.png" alt="Messendger" width="100" /></a>
+    <a href="https://messendger-app.vercel.app/" target="_blank"><img src="public/Icon.png" alt="Messendger" width="100" /></a>
 </p>
 
 <h4 align="center">Realtime Chat Web Application</h4>
