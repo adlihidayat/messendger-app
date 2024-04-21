@@ -1,17 +1,28 @@
 <h1 align="center"><b>Messendger</b></h1>
 
 <p align="center">
-   English Version 
+    <a href="https://messendger-app.vercel.app/" target="_blank"><img src="public/icon.png" alt="Messendger" width="100" /></a>
+</p>
+
+<h4 align="center">Realtime Chat Web Application</h4>
+
+<p align="center">
+    <a href="https://github.com/adlihidayat/messendger-app/fork" target="_blank">
+        <img src="https://img.shields.io/github/forks/adlihidayat/messendger-app?style=flat-square" alt="forks"/>
+    </a>
+    <a href="https://github.com/adlihidayat/messendger-app/stargazers" target="_blank">
+        <img src="https://img.shields.io/github/stars/adlihidayat/messendger-app?style=flat-square" alt="stars"/>
+    </a>
+    <a href="https://github.com/adlihidayat/messendger-app/issues" target="_blank">
+        <img src="https://img.shields.io/github/issues/adlihidayat/messendger-app?style=flat-square" alt="issues"/>
+    </a>
+    <a href="https://github.com/adlihidayat/messendger-app/pulls" target="_blank">
+        <img src="https://img.shields.io/github/issues-pr/adlihidayat/messendger-app?style=flat-square" alt="pull-requests"/>
+    </a>
 </p>
 
 <p align="center">
-    <a href="https://messendger-app.vercel.app/" target="_blank"><img src="public/apple-touch-icon.png" alt="Messendger" width="100" /></a>
-</p>
-
-<h4 align="center"><b>Realtime Chat Web Application</b></h4>
-
-<p align="center">
-    <a href="https://messendger-app.vercel.app/">Enter Website</a>=
+    <a href="https://messendger-app.vercel.app/">Visit Website</a>
 </p>
 
 ## 👋🏻 What is Messendger?
@@ -38,7 +49,7 @@ The website is built using a robust tech stack, incorporating cutting-edge techn
 - <b>Pusher</b>, Bi-directional hosted APIs to make realtime
 - <b>NextAuth</b>, Open-source authentication solution for Next js
 
-# 🛠💿 Usage
+# 💿 Usage
 
 To get started, simply visit our website at <https://messendger-app.vercel.app//>. Then follow these step.
 
