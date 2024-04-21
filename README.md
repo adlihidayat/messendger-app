@@ -7,6 +7,10 @@
 <h4 align="center">Realtime Chat Web Application</h4>
 
 <p align="center">
+<p align="center">
+    <a href="https://github.com/adlihidayat/messendger-app/blob/main/LICENSE" target="_blank">
+        <img src="https://img.shields.io/github/license/adlihidayat/messendger-app?style=flat-square" alt="licence" />
+    </a>
     <a href="https://github.com/adlihidayat/messendger-app/fork" target="_blank">
         <img src="https://img.shields.io/github/forks/adlihidayat/messendger-app?style=flat-square" alt="forks"/>
     </a>
