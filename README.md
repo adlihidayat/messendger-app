@@ -55,5 +55,5 @@ To get started, simply visit our website at <https://messendger-app.vercel.app>.
 
 1. Login using Google or Github Account
 2. Go to Add Friend Page and Search friend by its email
-3. Go back to chat app, and choose added friend to start a chat
+3. Go back to chat page, and choose added friend to start a chat
 4. Start chatting with your friend and have a good time enjoying this website!
