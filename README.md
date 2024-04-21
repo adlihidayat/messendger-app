@@ -51,7 +51,7 @@ The website is built using a robust tech stack, incorporating cutting-edge techn
 
 # 💿 Usage
 
-To get started, simply visit our website at <https://messendger-app.vercel.app//>. Then follow these step.
+To get started, simply visit our website at <https://messendger-app.vercel.app>. Then follow these step.
 
 1. Login using Google or Github Account
 2. Go to Add Friend Page and Search friend by its email
